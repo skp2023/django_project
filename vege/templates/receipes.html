@@ -23,6 +23,16 @@
         <button type="submit" class="btn btn-success">Add Receipe</button>
       </form>
       
+      <div class="mt-5">
+        </div class="mx-auto col-6 ml-auto">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Search Food</label>
+            <input name="receipe_name" value="{{receipe.receipe_name}}" type="text" class="form-control" >
+          </div>
+          <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+      </div>
+
       <table class="table">
         <thead>
           <tr>
@@ -30,8 +40,11 @@
             <th scope="col">Receipe_name</th>
             <th scope="col">Receip Desc</th>
             <th scope="col">Image</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
+
+
         <tbody>
         {% for receipe in receipes %}
           <tr>
@@ -39,10 +52,12 @@
             <td>{{receipe.receipe_name}}</td>
             <td>{{receipe.receipe_description}}</td>
             <td>
-              <img src="/media/{{receipe.receipe_image}}" style="height:  100px">
-            </td>
-          </tr>
-          <tr>
+              <img src="/media/{{receipe.receipe_image}}" style="height:  100px"> </td>
+              <td>
+                <a href="/delete-receipe/{{receipe.id}}/" class="btn btn-danger m-2">Delete</a> 
+                <a href="/update-receipe/{{receipe.id}}/" class="btn btn-success m-2">Update</a>
+                </td>
+            <tr>
         {% endfor %}
         </tbody>
       </table>
