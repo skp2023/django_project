@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from .models import *
 from django.http import HttpResponse
+from django.contrib.auth.models import User as U
 # Create your views here.
 
 def receipes(request):
@@ -60,4 +61,23 @@ def login_page(request):
     return render(request , 'login.html')
 
 def register(request):
+
+    if request.method == "POST":
+        print("-----------------------", request.POST)
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+
+        User = U.objects.create(
+                first_name = first_name,
+                last_name = last_name,
+                username = username
+            )
+        User.set_password(password)
+        User.save()
+
+        return redirect('/register/')
+
     return render(request , 'register.html')
